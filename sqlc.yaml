@@ -15,5 +15,6 @@ sql:
         emit_prepared_queries: false         # Emit prepared queries in generated Go code
         emit_interface: false                # Emit an interface for each generated Go package
         emit_exact_table_names: false        # Emit exact table names in generated Go code
+        emit_empty_slices: true              # Emit empty slices instead of null arrays in generated Go code
 plugins: []
 rules: []
