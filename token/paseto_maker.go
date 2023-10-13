@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/aead/chacha20poly1305"
-	"github.com/google/uuid"
 	"github.com/o1egl/paseto"
 )
 
@@ -31,32 +30,26 @@ func NewPasetoMaker(symmetricKey string) (Maker, error) {
 
 // CreateToken creates a new token for a username with a fixed valid duration
 func (maker *PasetoMaker) CreateToken(username string, duration time.Duration) (string, error) {
-	tokenID, err := uuid.NewRandom()
+	payload, err := NewPayload(username, duration)
 	if err != nil {
 		return "", err
-	}
-
-	payload := Payload{
-		ID:        tokenID,
-		Username:  username,
-		IssuedAt:  time.Now(),
-		ExpiredAt: time.Now().Add(duration),
 	}
 
 	return maker.paseto.Encrypt(maker.symmetricKey, payload, nil)
 }
 
 // VerifyToken checks if the token is valid or not
-func (maker *PasetoMaker) VerifyToken(tokenString string) (*Payload, error) {
+func (maker *PasetoMaker) VerifyToken(token string) (*Payload, error) {
 	payload := &Payload{}
 
-	err := maker.paseto.Decrypt(tokenString, maker.symmetricKey, payload, nil)
+	err := maker.paseto.Decrypt(token, maker.symmetricKey, payload, nil)
 	if err != nil {
 		return nil, ErrInvalidToken
 	}
 
-	if time.Now().After(payload.ExpiredAt) {
-		return nil, ErrExpiredToken
+	err = payload.Valid()
+	if err != nil {
+		return nil, err
 	}
 
 	return payload, nil
