@@ -1,5 +1,5 @@
 postgres:
-	docker run --name vasans-postgres -p 5433:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=Vasan297Ichizoku -d postgres
+	docker run --name vasans-postgres --network vasans-bank-network -p 5433:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=Vasan297Ichizoku -d postgres
 
 createdb:
 	docker exec -it vasans-postgres createdb --username=root --owner=root simple_bank
