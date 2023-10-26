@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vasans-simple-bank-api-deployment
+  labels:
+    app: vasans-simple-bank-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vasans-simple-bank-api
+  template:
+    metadata:
+      labels:
+        app: vasans-simple-bank-api
+    spec:
+      containers:
+      - name: vasans-simple-bank-api
+        image: 928582307684.dkr.ecr.us-east-2.amazonaws.com/vasans_simplebank:606fca76304003ef3a76be2690917fe52292af0c
+        ports:
+        - containerPort: 8080
