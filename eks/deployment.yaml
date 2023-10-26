@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: vasans-simple-bank-api
-        image: 928582307684.dkr.ecr.us-east-2.amazonaws.com/vasans_simplebank:932f22c1657f25965dbd0626530ac0e73eac0a1f
+        image: 928582307684.dkr.ecr.us-east-2.amazonaws.com/vasans_simplebank:5ca9df02ea1c9561bad76775c96de208408920b4
         ports:
         - containerPort: 8080
