@@ -37,4 +37,7 @@ proto:
 mock:
 	mockgen -package mockdb -destination db/mock/store.go pavanvasan.com/simplebank/db/sqlc Store
 
-.PHONY: createdb dropdb postgres migrateup migratedown migrateupone migratedownone sqlc test server mock proto
+evans:
+	evans --host localhost --port 9090 -r repl
+
+.PHONY: createdb dropdb postgres migrateup migratedown migrateupone migratedownone sqlc test server proto mock evans
