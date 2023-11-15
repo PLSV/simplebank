@@ -41,4 +41,7 @@ mock:
 evans:
 	evans --host localhost --port 9090 -r repl
 
-.PHONY: createdb dropdb postgres migrateup migratedown migrateupone migratedownone sqlc test server proto mock evans
+redis:
+	docker run --name redis -p 6379:6379 -d redis:7-alpine
+
+.PHONY: createdb dropdb postgres migrateup migratedown migrateupone migratedownone sqlc test server proto mock evans redis
