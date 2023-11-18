@@ -37,6 +37,7 @@ proto:
 
 mock:
 	mockgen -package mockdb -destination db/mock/store.go pavanvasan.com/simplebank/db/sqlc Store
+	mockgen -package mockwk -destination worker/mock/distributor.go pavanvasan.com/simplebank/worker TaskDistributor
 
 evans:
 	evans --host localhost --port 9090 -r repl
